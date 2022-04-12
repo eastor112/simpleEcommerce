@@ -106,12 +106,11 @@
 .card__shipping{
   font-size: 0.7rem;
   align-self: end;
-  padding-bottom: 3px;
   font-weight: 500;
   color: rgb(0, 184, 0);
   border: 1px solid rgb(0, 184, 0);
   width: fit-content;
-  padding: 1px 5px;
+  padding: 1px 5px 3px;
   border-radius: 2px;
   margin-top: 3px;
 }
