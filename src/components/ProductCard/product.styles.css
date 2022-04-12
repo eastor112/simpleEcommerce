@@ -50,6 +50,7 @@
 
 .card__separator{
   margin-bottom: 15px;
+  border: 1px solid #eee;
 }
 
 .card__upper__price{
@@ -120,7 +121,7 @@
 }
 
 .card__title{
-  padding-top: 6px;
+  padding-top: 16px;
   font-size: 0.8rem;
   font-weight: 400;
   color: #555;

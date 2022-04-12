@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IProduct } from '../../interfaces/productsInterface';
-import './styles.css';
+import './product.styles.css';
 
 const ProductCard = ({ title, price, image }: IProduct) => {
   const [liked, setLiked] = useState<boolean>(false);

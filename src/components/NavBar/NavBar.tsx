@@ -1,19 +1,17 @@
-import { Link } from 'react-router-dom';
-import './styles.css';
+import { Link, NavLink } from 'react-router-dom';
+import './navBar.styles.css';
 
 const NavBar = () => {
   return (
     <nav>
       <Link to="/" className="brand">
         <i className="fa-solid fa-shop" />
-        Happy Shopping
+        Fast Shopping
       </Link>
 
       <div className="right">
-        <Link to="/" className="active">
-          Home
-        </Link>
-        <Link to="/about">About</Link>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/about">About</NavLink>
       </div>
     </nav>
   );

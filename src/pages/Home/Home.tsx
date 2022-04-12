@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { IProduct } from '../../interfaces/productsInterface';
-import './styles.css';
+import './home.styles.css';
 
 const Home = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
