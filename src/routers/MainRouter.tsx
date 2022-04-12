@@ -10,7 +10,7 @@ const MainRouter = () => {
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/detail/:id" element={<ProductDetail />} />
+        <Route path="/detail/:productId" element={<ProductDetail />} />
       </Route>
     </Routes>
   );

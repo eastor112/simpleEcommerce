@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { IProduct } from '../../interfaces/productsInterface';
 import './product.styles.css';
 
-const ProductCard = ({ title, price, image }: IProduct) => {
+const ProductCard = ({ id, title, price, image }: IProduct) => {
   const [liked, setLiked] = useState<boolean>(false);
   const [more, setMore] = useState<boolean>(false);
 
@@ -60,9 +61,11 @@ const ProductCard = ({ title, price, image }: IProduct) => {
       <p className="card__duration">
         This offer finish in:<span> 12:36:00 </span>
       </p>
-      <button type="button" className="card__button">
-        View details
-      </button>
+      <Link to={`/detail/${id}`}>
+        <button type="button" className="card__button">
+          View details
+        </button>
+      </Link>
     </div>
   );
 };
