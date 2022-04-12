@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import App from '../App';
-import About from '../pages/About';
-import Home from '../pages/Home';
-import ProductDetail from '../pages/ProductDetail';
+import About from '../pages/About/About';
+import Home from '../pages/Home/Home';
+import ProductDetail from '../pages/ProductDetail/ProductDetail';
 
 const MainRouter = () => {
   return (

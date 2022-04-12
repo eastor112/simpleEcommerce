@@ -37,7 +37,7 @@ const ProductCard = ({ title, price, image }: IProduct) => {
       <figure className="card__image_container">
         <img className="card__image" src={image} alt={title} />
       </figure>
-      <hr />
+      <hr className="card__separator" />
 
       <div className={`card__upper__price ${!more && 'hidden'}`}>
         <p>S/ 132</p>

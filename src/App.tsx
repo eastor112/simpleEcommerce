@@ -5,8 +5,9 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <hr />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 };

@@ -1,0 +1,11 @@
+.main__section{
+  padding: 96px 64px 64px;
+  background-color: #eee;
+  min-height: 100vh;
+}
+
+.home{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
