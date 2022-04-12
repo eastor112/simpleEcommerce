@@ -1,9 +1,16 @@
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 const App = () => {
   return (
     <>
-      <nav>NavBar👉</nav>
+      <nav>
+        <Link style={{ marginRight: '15px' }} to="/">
+          Home
+        </Link>
+        <Link style={{ marginRight: '15px' }} to="/about">
+          About
+        </Link>
+      </nav>
       <hr />
       <Outlet />
     </>
