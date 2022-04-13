@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import './index.css';
-
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 import MainRouter from './routers/MainRouter';
+import store from './context/store';
+import './index.css';
 
 const container = document.getElementById('root');
 if (container) {
@@ -11,7 +12,9 @@ if (container) {
   root.render(
     <React.StrictMode>
       <BrowserRouter>
-        <MainRouter />
+        <Provider store={store}>
+          <MainRouter />
+        </Provider>
       </BrowserRouter>
     </React.StrictMode>,
   );

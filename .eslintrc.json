@@ -58,6 +58,7 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "default-param-last": "off"
   }
 }
