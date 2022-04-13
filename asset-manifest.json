@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/simpleEcommerce/static/css/main.33cf3e13.css",
+    "main.js": "/simpleEcommerce/static/js/main.fa5a6b81.js",
+    "index.html": "/simpleEcommerce/index.html",
+    "main.33cf3e13.css.map": "/simpleEcommerce/static/css/main.33cf3e13.css.map",
+    "main.fa5a6b81.js.map": "/simpleEcommerce/static/js/main.fa5a6b81.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.33cf3e13.css",
+    "static/js/main.fa5a6b81.js"
+  ]
+}
