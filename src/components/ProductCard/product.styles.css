@@ -160,8 +160,13 @@
   background-color: rgb(232, 72, 72);
 }
 
-.disabled{
+.disabled, .disabled:hover{
   background-color: rgb(224, 104, 104, 0.5);
+  cursor: not-allowed;
+}
+
+.cardDisabled {
+  opacity: 0.6;
 }
 
 .hidden{

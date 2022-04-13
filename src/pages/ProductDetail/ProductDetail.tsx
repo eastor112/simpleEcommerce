@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react';
 import StarRatings from 'react-star-ratings';
 import './productDetail.styles.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveProduct } from '../../context/action-creators/index';
+import {
+  setActiveProduct,
+  setIsFavourite,
+  setIsActiveProduct,
+} from '../../context/action-creators/index';
 import { RootState } from '../../context/reducers/index';
 import { IProductState } from '../../interfaces/productsInterface';
 import { calcRemainingtime } from '../../helpers/timeHelper';
@@ -15,14 +19,10 @@ const ProductDetail = () => {
     (state: RootState) => state.store,
   );
 
-  const [liked, setLiked] = useState(false);
   const [remain, setRemain] = useState<string>('');
 
-  const handleLiked = () => {
-    setLiked(!liked);
-  };
-
-  const { description, image, price, rating, title, category } = product || {};
+  const { description, image, price, rating, title, category, isFavourite } =
+    product || {};
 
   useEffect(() => {
     if (productId) {
@@ -44,6 +44,7 @@ const ProductDetail = () => {
         if (hours <= 0 && seconds <= 0 && minutes <= 0) {
           setRemain('00:00:00');
           clearInterval(updateTime);
+          if (productId) dispatch(setIsActiveProduct(productId, false));
         }
       }, 1000);
     }
@@ -52,6 +53,12 @@ const ProductDetail = () => {
       clearInterval(updateTime);
     };
   }, [product]);
+
+  const handleLiked = () => {
+    if (productId) {
+      dispatch(setIsFavourite(productId, !isFavourite));
+    }
+  };
 
   return (
     <section className="main__section product__detail">
@@ -72,7 +79,7 @@ const ProductDetail = () => {
         <div className="product__detail__container">
           <div className="left">
             <button type="button" className="card__like" onClick={handleLiked}>
-              {liked ? (
+              {isFavourite ? (
                 <i className="fas fa-heart" />
               ) : (
                 <i className="far fa-heart" />

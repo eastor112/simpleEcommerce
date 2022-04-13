@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 export const randomOfferTime = () => {
-  const min = Math.ceil(Math.random() * 150 + 30);
+  const min = Math.ceil(Math.random() * 150 + 15);
   const finishTime = moment(new Date()).add(min, 'seconds');
 
   return finishTime.toDate();

@@ -11,4 +11,24 @@ interface SetProductAction {
   payload: IProduct;
 }
 
-export type Action = SetProductsAction | SetProductAction;
+interface SetIsActive {
+  type: actionType.SET_IS_ACTIVE;
+  payload: {
+    id: number | string;
+    isActive: boolean;
+  };
+}
+
+interface SetIsFavourite {
+  type: actionType.SET_IS_FAVOURITE;
+  payload: {
+    id: number | string;
+    isFavourite: boolean;
+  };
+}
+
+export type Action =
+  | SetProductsAction
+  | SetProductAction
+  | SetIsActive
+  | SetIsFavourite;

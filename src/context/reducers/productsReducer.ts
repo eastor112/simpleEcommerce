@@ -20,6 +20,42 @@ const productsReducer = (state = initialState, action: Action) => {
         ...state,
         activeProduct: action.payload,
       };
+
+    case actionType.SET_IS_ACTIVE:
+      return {
+        ...state,
+        products: state.products.map((item) => {
+          if (item.id === Number(action.payload.id)) {
+            return {
+              ...item,
+              isActive: action.payload.isActive,
+            };
+          }
+
+          return item;
+        }),
+      };
+
+    case actionType.SET_IS_FAVOURITE:
+      return {
+        ...state,
+        products: state.products.map((item) => {
+          if (item.id === Number(action.payload.id)) {
+            return {
+              ...item,
+              isFavourite: action.payload.isFavourite,
+            };
+          }
+
+          return item;
+        }),
+        activeProduct: state.activeProduct
+          ? {
+              ...state.activeProduct,
+              isFavourite: action.payload.isFavourite,
+            }
+          : null,
+      };
     default:
       return state;
   }

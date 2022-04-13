@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { IProductExtended } from '../../interfaces/productsInterface';
 import './product.styles.css';
 import { calcRemainingtime } from '../../helpers/timeHelper';
+import {
+  setIsActiveProduct,
+  setIsFavourite,
+} from '../../context/action-creators/index';
 
 const ProductCard = ({
   id,
@@ -10,52 +15,62 @@ const ProductCard = ({
   price,
   image,
   finishOffer,
+  isActive,
+  isFavourite,
 }: IProductExtended) => {
-  const [liked, setLiked] = useState<boolean>(false);
+  const dispatch = useDispatch();
   const [more, setMore] = useState<boolean>(false);
   const [remain, setRemain] = useState<string>('');
 
   useEffect(() => {
     let updateTime: NodeJS.Timer;
 
-    setInterval(() => {
-      const { remain, seconds, hours, minutes } =
-        calcRemainingtime(finishOffer);
-      setRemain(remain);
-      if (seconds <= 0 && minutes <= 0 && hours <= 0) {
-        setRemain('00:00:00');
-        clearInterval(updateTime);
-      }
+    if (isActive) {
+      updateTime = setInterval(() => {
+        const { remain, seconds, hours, minutes } =
+          calcRemainingtime(finishOffer);
+        setRemain(remain);
 
-      return () => {
-        clearInterval(updateTime);
-      };
-    }, 1000);
+        if (seconds <= 0 && minutes <= 0 && hours <= 0) {
+          setRemain('00:00:00');
+          clearInterval(updateTime);
+          dispatch(setIsActiveProduct(id, false));
+        }
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(updateTime);
+    };
   }, [id]);
 
   const handleLiked = (): void => {
-    setLiked(!liked);
+    dispatch(setIsFavourite(id, !isFavourite));
   };
 
   const handleMouseEnter = (): void => {
-    setMore(true);
+    if (isActive) {
+      setMore(true);
+    }
   };
+
   const handleMouseLeave = (): void => {
     setMore(false);
   };
 
   return (
     <div
-      className="card"
+      className={`card ${!isActive && 'cardDisabled'}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <button
         type="button"
-        className={`card__like ${!liked && !more && 'hidden'}`}
+        className={`card__like ${!isFavourite && !more && 'hidden'}`}
         onClick={handleLiked}
+        disabled={!isActive}
       >
-        {liked ? (
+        {isFavourite ? (
           <i className="fas fa-heart" />
         ) : (
           <i className="far fa-heart" />
@@ -73,8 +88,10 @@ const ProductCard = ({
       <hr className={`card__line__through ${!more && 'hidden'}`} />
 
       <p className="card__price">
-        S/ {price.toString().split('.')[0]}
-        <span className="decimal">{price.toString().split('.')[1]}</span>
+        S/ {price.toFixed(2).toString().split('.')[0]}
+        <span className="decimal">
+          {price.toFixed(2).toString().split('.')[1]}
+        </span>
         <span className="discount">18% OFF</span>
       </p>
       <p className="card__credit">
@@ -91,7 +108,11 @@ const ProductCard = ({
       )}
 
       <Link to={`/detail/${id}`}>
-        <button type="button" className="card__button">
+        <button
+          type="button"
+          className={`card__button ${!isActive && 'disabled'}`}
+          disabled={!isActive}
+        >
           View details
         </button>
       </Link>

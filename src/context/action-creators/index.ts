@@ -41,3 +41,23 @@ export const setActiveProduct = (id: number | string) => {
     }
   };
 };
+
+export const setIsActiveProduct = (id: number | string, isActive: boolean) => {
+  return {
+    type: actionType.SET_IS_ACTIVE,
+    payload: {
+      id,
+      isActive,
+    },
+  };
+};
+
+export const setIsFavourite = (id: number | string, isFavourite: boolean) => {
+  return {
+    type: actionType.SET_IS_FAVOURITE,
+    payload: {
+      id,
+      isFavourite,
+    },
+  };
+};
