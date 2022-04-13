@@ -1,7 +1,7 @@
 import { IProduct, IProductExtended } from '../interfaces/productsInterface';
 import { randomOfferTime } from '../helpers/timeHelper';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL: string | undefined = process.env.REACT_APP_API_URL;
 
 export const getAllProductsApi = async () => {
   const results = await fetch(`${BASE_URL}/products`);
