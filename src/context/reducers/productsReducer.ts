@@ -1,24 +1,24 @@
-import { IProduct } from '../../interfaces/productsInterface';
+import { IProductState } from '../../interfaces/productsInterface';
 import { Action } from '../actions/index';
 import actionType from '../action-types/index';
 
-interface IProductState {
-  products: IProduct[];
-}
-
-const initialState = {
+const initialState: IProductState = {
   products: [],
+  activeProduct: null,
 };
 
-const productsReducer = (
-  state: IProductState = initialState,
-  action: Action,
-) => {
+const productsReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case actionType.SET_PRODUCTS:
       return {
         ...state,
         products: action.payload,
+      };
+
+    case actionType.SET_PRODUCT:
+      return {
+        ...state,
+        activeProduct: action.payload,
       };
     default:
       return state;

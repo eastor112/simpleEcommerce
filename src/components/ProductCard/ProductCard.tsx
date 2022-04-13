@@ -1,11 +1,37 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { IProduct } from '../../interfaces/productsInterface';
+import { useState, useEffect } from 'react';
+import { IProductExtended } from '../../interfaces/productsInterface';
 import './product.styles.css';
+import { calcRemainingtime } from '../../helpers/timeHelper';
 
-const ProductCard = ({ id, title, price, image }: IProduct) => {
+const ProductCard = ({
+  id,
+  title,
+  price,
+  image,
+  finishOffer,
+}: IProductExtended) => {
   const [liked, setLiked] = useState<boolean>(false);
   const [more, setMore] = useState<boolean>(false);
+  const [remain, setRemain] = useState<string>('');
+
+  useEffect(() => {
+    let updateTime: NodeJS.Timer;
+
+    setInterval(() => {
+      const { remain, seconds, hours, minutes } =
+        calcRemainingtime(finishOffer);
+      setRemain(remain);
+      if (seconds <= 0 && minutes <= 0 && hours <= 0) {
+        setRemain('00:00:00');
+        clearInterval(updateTime);
+      }
+
+      return () => {
+        clearInterval(updateTime);
+      };
+    }, 1000);
+  }, [id]);
 
   const handleLiked = (): void => {
     setLiked(!liked);
@@ -58,9 +84,12 @@ const ProductCard = ({ id, title, price, image }: IProduct) => {
       <p className="card__shipping">Free shipping</p>
       <p className={`card__title  ${!more && 'hidden'}`}>{title}</p>
 
-      <p className="card__duration">
-        This offer finish in:<span> 12:36:00 </span>
-      </p>
+      {remain !== '' && (
+        <p className="card__duration">
+          This offer finish in:<span> {remain} </span>
+        </p>
+      )}
+
       <Link to={`/detail/${id}`}>
         <button type="button" className="card__button">
           View details

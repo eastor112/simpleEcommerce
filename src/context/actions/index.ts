@@ -1,8 +1,14 @@
 import { IProduct } from '../../interfaces/productsInterface';
+import actionType from '../action-types/index';
 
 interface SetProductsAction {
-  type: string;
+  type: actionType.SET_PRODUCTS;
   payload: IProduct[];
 }
 
-export type Action = SetProductsAction;
+interface SetProductAction {
+  type: actionType.SET_PRODUCT;
+  payload: IProduct;
+}
+
+export type Action = SetProductsAction | SetProductAction;
